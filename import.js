@@ -1,6 +1,6 @@
-const express = require('express');
+
+const db = require("./knex");
 const axios = require('axios');
-const app = express();
 require("dotenv").config();
 
 function createNASAURL() {
@@ -11,19 +11,28 @@ function createNASAURL() {
     const ISOYESTERDAY = yesterday.toISOString().split('T')[0]; 
     return `https://api.nasa.gov/neo/rest/v1/feed?start_date=${ISOYESTERDAY}&end_date=${ISOTODAY}&api_key=${process.env.NASA_API_KEY}`;
 }
+
+const getAsteroids = async (url) => {
+    const {data: asteroids} = await axios.get(url)
+    console.log(asteroids)
+    return asteroids;
+}
+
+
   
-let NASA_URL =  createNASAURL();
+getAsteroids(createNASAURL());
 
-app.use(express.static(__dirname + "/dist"));
 
-app.get("/api", (req, res) => {
-    axios.get(NASA_URL).then((response) => {
-        res.send(response.data)
- });
-});
+ const seedAsteroids = async () => {
+ try {
+    getAsteroids(createNASAURL());
+   }
+   catch (err) {
+       console.error("error inserting asteroids from NASA☄️", err)
+   }
 
-const port = process.env.PORT || 4001;
+  }
 
-app.listen(port, () => {
-    console.log("App listneing on port " + 4001);
-})
+
+  module.exports = seedAsteroids;
+

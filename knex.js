@@ -1,7 +1,7 @@
 const knex = require("knex");
 require("dotenv").config();
 
-let knex = knex({
+let db = knex({
     client: 'pg',
     connection: 
         process.env.DATABASE_URL ||
@@ -9,4 +9,4 @@ let knex = knex({
         searchPath: "public",
 });
 
-moudule.exports = db;
+module.exports = db;
