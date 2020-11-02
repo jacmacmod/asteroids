@@ -14,23 +14,21 @@ function createNASAURL() {
   
 let NASA_URL =  createNASAURL();
 
-async function getAsteroids(URL) {
-    const { data: asteroids } = await axios.get(URL);
- return asteroids;
-}
-
-
-
+// async function getAsteroids(URL) {
+//     const { data: asteroids } = await axios.get(URL);
+//  return asteroids;
+// }
 app.use(express.static(__dirname + "/dist"));
 
-app.use("/api", (req, res) => {
-let asteroids = getAsteroids(NASA_URL)
-    res.json(asteroids);
+app.get("/api", (req, res) => {
+ axios.get(NASA_URL).then((response)=>{
+     res.send(response.data)
+ })
 })
 
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 4001;
 
 app.listen(port, () => {
-    console.log("App listneing on port " + 4000);
+    console.log("App listneing on port " + 4001);
 })
