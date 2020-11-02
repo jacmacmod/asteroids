@@ -6,9 +6,11 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "server": "node server.js"
+    "server": "node server.js",
+    "hack:server": "nodemon server"
   },
   "dependencies": {
+    "axios": "^0.21.0",
     "core-js": "^3.6.5",
     "express": "^4.17.1",
     "nodemon": "^2.0.6",
