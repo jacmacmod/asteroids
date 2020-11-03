@@ -35,7 +35,7 @@ export default {
   name: 'App',
   data: () => ({
     asteroids: [1,2,3],
-    scale: 1,
+    scale: 1.1,
     selectedAsteroid: "",
     asteroid: "",
     EarthObject: "",
