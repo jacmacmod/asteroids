@@ -1,10 +1,10 @@
 exports.up = function(knex) {
-    return knex.schema.hasTable('itemss').then(function (exists) {
+    return knex.schema.hasTable('items').then(function (exists) {
         if (!exists) {
             return knex.schema.createTable('items', function (table) {
         table.integer("id");
         table.string("name");
-        table.integer("diamter_in_meters");
+        table.integer("diameter_in_meters");
     })
 }
 })

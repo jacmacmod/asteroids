@@ -1,5 +1,7 @@
 require("dotenv").config();
-const db = require("./knexfile");
+const config = require("./knexfile");
+const knex = require("knex");
+const db = knex(config);
 
 const items = [
     {
@@ -36,13 +38,14 @@ const items = [
 const importItems = async () => {
     try {
        for (let item of items){
+           console.log(items)
          const id = item.id;
          const name = item.name;
-         const diamater_in_meters = item.diamater_in_meters;
+         const diameter_in_meters = item.diameter_in_meters;
          const itemData = await db('items').insert({
             id,
             name,
-            diamater_in_meters,
+            diameter_in_meters,
  
         });
         console.log(itemData)
