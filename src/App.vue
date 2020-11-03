@@ -18,20 +18,11 @@
 <div> 
   Closest Object: {{EarthObject}}
 </div>
-
-<div class="asteroid" >
+<div class="comparison-area">
+  <div class="asteroid" >{{selectedAsteroid}}</div>
+  <div class="asteroid scaledObject" :style="cssProps">{{EarthObject.name}} </div>
 </div>
-
-<div class="asteroid scaledObject" :style="cssProps">
-</div>
-
-<!-- 
-<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="50" cy="50" r="3"/>
-</svg>
-<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="50" cy="50" r="3"/>
-</svg> -->
+<h2>{{scale}}</h2>
   </div>
 </template>
 
@@ -42,7 +33,7 @@ export default {
   name: 'App',
   data: () => ({
     asteroids: [1,2,3],
-    scale: 45,
+    scale: 2,
     selectedAsteroid: "",
     asteroid: "",
     EarthObject: "",
@@ -58,7 +49,11 @@ export default {
       closestObjectToAsteroid(this.selectedAsteroid)
       .then((data) => {
         this.EarthObject = data;
-        
+        for (let asteroid of this.asteroids) {
+          if(asteroid.name === this.selectedAsteroid){
+            this.scale = asteroid.diameter_in_meters_min / this.EarthObject.diameter_in_meters;
+          }
+        }
       });
     },
   
@@ -67,7 +62,7 @@ export default {
   computed: {
     cssProps() {
       return {
-        '--objectScale': 4,
+        '--objectScale': this.scale,
         '--j': "red",
     
       }
@@ -81,14 +76,20 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  background-color: #3b404e;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
   margin-top: 60px;
 }
-
+.comparions-area {
+  display: grid;
+  grid-template-columns: 150px 150px 150px;
+}
 .asteroid {
-  display: grid inline-block;
-  margin: 500px;
+  margin: 100px;
   width: 80px;
   height: 80px;
   background-color: skyblue;
