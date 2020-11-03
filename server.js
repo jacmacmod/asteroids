@@ -22,8 +22,9 @@ app.get("/api", (req, res) => {
  });
 });
 
-const port = process.env.PORT || 4001;
-
-app.listen(port, () => {
-    console.log("App listneing on port " + 4001);
-})
+// Always return the main index.html, since we are developing a single page application
+app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "..", "dist", "index.html"));
+  });
+  
+  module.exports = server;
