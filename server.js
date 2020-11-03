@@ -50,13 +50,13 @@ app.get("/api/asteroids", async (req, res) => {
     }
   });
  
-app.get("/api/closest/:id", async (req, res) => {
-    const id = req.params.id;
+app.get("/api/closest/:name", async (req, res) => {
+    const name = req.params.name;
     try {
       const diameterToCompare = await db
       .select("diameter_in_meters_min")
       .table("asteroids")
-      .where({id:id})
+      .where({name:name})
           
     let diameter = diameterToCompare[0]["diameter_in_meters_min"];
     const compareable = await db.raw(`select name, diameter_in_meters from items order by abs(diameter_in_meters - ${diameter}) limit 1;`)
