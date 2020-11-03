@@ -12,7 +12,7 @@
   <option>C</option>
 </select>
 <span>Selected: {{ selected }}</span>
-
+{{asteroidNames}}
 <select v-model="selected">
   <option disabled value="">Please select one</option>
   <option>A</option>
@@ -20,17 +20,34 @@
   <option>C</option>
 </select>
 <span>Selected: {{ selected }}</span>
+
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="3"/>
+</svg>
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="3"/>
+</svg>
   </div>
 </template>
 
 <script>
-
+import {asteroidNames} from "../utils";
 
 export default {
   name: 'App',
   data: () => ({
+    asteroidNames: [1,2,3],
     selected: "",
   }),
+  mounted() {
+  asteroidNames().then((data) => {
+    console.log(data)
+    this.asteroidNames=data;
+  });
+  },
+  methods: {
+
+  }
 }
 </script>
 
