@@ -7,12 +7,14 @@
 
 <select v-model="selected">
   <option disabled value="">Please select one</option>
-  <option>A</option>
-  <option>B</option>
-  <option>C</option>
+  
+  <option v-for="name of asteroidNames" :key="name" >
+ {{name}}
+  </option>
+
 </select>
 <span>Selected: {{ selected }}</span>
-{{asteroidNames}}
+
 <select v-model="selected">
   <option disabled value="">Please select one</option>
   <option>A</option>

@@ -49,11 +49,9 @@ app.get("/api/asteroids", async (req, res) => {
       res.sendStatus(500);
     }
   });
- // select diameter_in_meters, name from items order by abs(diameter_in_meters - 25) limit 1;
+ 
 app.get("/api/closest/:id", async (req, res) => {
     const id = req.params.id;
-    //console.log("here" + id)
-    //res.send("jack " + id)
     try {
       const diameterToCompare = await db
       .select("diameter_in_meters_min")

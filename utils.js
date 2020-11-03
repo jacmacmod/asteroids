@@ -5,6 +5,5 @@ export const asteroidNames = async () => {
     let result = names.map(asteroid => {
         return asteroid.name
     })
-        console.log(result)
     return result;
   };
