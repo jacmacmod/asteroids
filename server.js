@@ -49,6 +49,25 @@ app.get("/api/asteroids", async (req, res) => {
       res.sendStatus(500);
     }
   });
-
+ // select diameter_in_meters, name from items order by abs(diameter_in_meters - 25) limit 1;
+app.get("/api/closest/:id", async (req, res) => {
+    const id = req.params.id;
+    //console.log("here" + id)
+    //res.send("jack " + id)
+    try {
+      const diameterToCompare = await db
+      .select("diameter_in_meters_min")
+      .table("asteroids")
+      .where({id:id})
+          
+    let diameter = diameterToCompare[0]["diameter_in_meters_min"];
+    const compareable = await db.raw(`select name, diameter_in_meters from items order by abs(diameter_in_meters - ${diameter}) limit 1;`)
+    res.json(compareable.rows[0]);
+    
+    } catch (err) {
+      console.error("Error finding names!", err);
+      res.sendStatus(500);
+    }
+  });
   app.listen(PORT, () => console.log(`App listening on port ${PORT}!`));
   
