@@ -38,17 +38,15 @@ const items = [
 const importItems = async () => {
     try {
        for (let item of items){
-           console.log(items)
          const id = item.id;
          const name = item.name;
          const diameter_in_meters = item.diameter_in_meters;
-         const itemData = await db('items').insert({
+         await db('items').insert({
             id,
             name,
             diameter_in_meters,
  
         });
-        console.log(itemData)
        }
     return;
         }

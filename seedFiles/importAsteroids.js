@@ -31,7 +31,7 @@ const seedAsteroids = async () => {
         const miss_distance_lunar = Math.round(Number(asteroid.close_approach_data[0].miss_distance.lunar));
         const orbiting_body = asteroid.close_approach_data[0].orbiting_body;
         
-        const asteroidData = await db('asteroids').insert({
+        await db('asteroids').insert({
             id,
             name,
             url,
@@ -41,7 +41,6 @@ const seedAsteroids = async () => {
             miss_distance_lunar,
             orbiting_body,
         });
-        //console.log(asteroidData)
         }
     return;
         }
