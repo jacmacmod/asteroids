@@ -41,7 +41,7 @@ const seedAsteroids = async () => {
             miss_distance_lunar,
             orbiting_body,
         });
-        console.log(asteroidData)
+        //console.log(asteroidData)
         }
     return;
         }

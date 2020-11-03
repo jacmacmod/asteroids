@@ -1,13 +1,10 @@
-const app = require("./server");
 const knex = require("knex");
-
 const config = require("./knexfile");
 const db = knex(config);
 
-const seedAsteroids = require("./importAsteroids");
-const seedItems = require("./importItems")
 
-const PORT = process.env.PORT || 9000;
+const seedAsteroids = require("./importAsteroids");
+const seedItems = require("./importItems");
 
 (async () => {
   try {
@@ -23,11 +20,8 @@ const PORT = process.env.PORT || 9000;
     await seedItems();
     console.log("items table populated");
 
-    console.log("Starting express");
-    app.listen(PORT, () => console.log(`App listening on port ${PORT}!`));
-
   } catch (err) {
-    console.error("Error starting app!", err);
+    console.error("Error migrateing and seeding!", err);
     process.exit(-1);
   }
 })();

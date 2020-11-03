@@ -1,27 +1,25 @@
 const express = require('express');
 const app = express();
+const knex = require("knex");
+const config = require("./knexfile");
+const db = knex(config);
 require("dotenv").config();
 
+
+const PORT = process.env.PORT || 9000;
 // Serve static assets
 app.use(express.static(__dirname, + "/public"));
-
-app.get("/api", (req, res) => {
-        res.send("jack")
-});
 
 app.get("/api/asteroids", async (req, res) => {
     try {
       const asteroids = await db.select().table("asteroids");
-      // console.log(locations);
+      console.log(asteroids);
       res.json(asteroids);
     } catch (err) {
-      console.error("Error loading locations!", err);
+      console.error("Error loading asteroids!", err);
       res.sendStatus(500);
     }
   });
-// Always return the main index.html, since we are developing a single page application
-app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "..", "dist", "index.html"));
-  });
+
+  app.listen(PORT, () => console.log(`App listening on port ${PORT}!`));
   
-module.exports = app;
