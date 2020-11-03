@@ -5,18 +5,24 @@
     ☄️ ☄️ ☄️ ☄️ ☄️ ☄️ ☄️ ☄️
   <button v-on:click="compare">COMPARE</button>
 
-<select v-model="selectedAsteroid">
+<select v-model="selectedAsteroid" >
   <option disabled value="">Please select Asteroid☄️</option>
-  <option v-for="name of asteroidNames" :key="name" >
- {{name}}
+  <option v-for="asteroid of asteroids" :key="asteroid" >
+  {{asteroid.name}}
   </option>
 </select>
 
 <div> 
- selectedAsteroid: {{ selectedAsteroid }}
+ selected Asteroid: {{selectedAsteroid}}
 </div>
 <div> 
   Closest Object: {{EarthObject}}
+</div>
+
+<div class="asteroid" >
+</div>
+
+<div class="asteroid scaledObject" :style="cssProps">
 </div>
 
 <!-- 
@@ -30,35 +36,43 @@
 </template>
 
 <script>
-import {asteroidNames, closestObjectToAsteroid} from "../utils";
+import {asteroidNamesAndSize, closestObjectToAsteroid} from "../utils";
 
 export default {
   name: 'App',
   data: () => ({
-    asteroidNames: [1,2,3],
+    asteroids: [1,2,3],
+    scale: 45,
     selectedAsteroid: "",
+    asteroid: "",
     EarthObject: "",
     jack: "jack",
   }),
   mounted() {
-  asteroidNames().then((data) => {
-    console.log(data)
-    this.asteroidNames=data;
+  asteroidNamesAndSize().then((data) => {
+    this.asteroids=data;
   });
   },
   methods: {
     compare() {
-      console.log("here");
-      console.log(this.jack,this.selectedAsteroid );
       closestObjectToAsteroid(this.selectedAsteroid)
       .then((data) => {
         this.EarthObject = data;
-        console.log(data + "in front end now")
-
+        
       });
     },
+  
 
-  }
+  },
+  computed: {
+    cssProps() {
+      return {
+        '--objectScale': 4,
+        '--j': "red",
+    
+      }
+    }
+    },
 }
 </script>
 
@@ -71,4 +85,18 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+
+.asteroid {
+  display: grid inline-block;
+  margin: 500px;
+  width: 80px;
+  height: 80px;
+  background-color: skyblue;
+}
+
+.scaledObject {
+  transform: scale(var(--objectScale)); /* Equal to scaleX(0.7) scaleY(0.7) */
+  background-color: var(--j);
+}
+
 </style>

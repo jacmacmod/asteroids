@@ -25,9 +25,9 @@ app.get("/api/asteroids", async (req, res) => {
     }
   });
 
-  app.get("/api/asteroids/names", async (req, res) => {
+  app.get("/api/asteroids/namesAndSize", async (req, res) => {
     try {
-      const asteroidNames = await db.select("name").table("asteroids");
+      const asteroidNames = await db.select("name", "diameter_in_meters_min").table("asteroids");
       res.json(asteroidNames);
     } catch (err) {
       console.error("Error finding names!", err);
