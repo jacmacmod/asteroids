@@ -10,7 +10,7 @@
     "hack:client": "vue-cli-service serve",
     "hack:server": "nodemon server",
     "hack": "concurrently \"yarn hack:server\" \"yarn hack:client\"",
-    "start": "npm run app.js"
+    "start": "npm run app"
   },
   "dependencies": {
     "axios": "^0.21.0",
