@@ -22,7 +22,7 @@ const items = [
     {
         id:4,
         name: 'Airplane',
-        diameter_in_meters: 50, 
+        diameter_in_meters: 70, 
     },
     {
         id:5,
@@ -45,7 +45,6 @@ const importItems = async () => {
             id,
             name,
             diameter_in_meters,
- 
         });
        }
     return;

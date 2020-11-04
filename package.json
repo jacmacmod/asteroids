@@ -10,12 +10,13 @@
     "hack:client": "vue-cli-service serve",
     "hack:server": "nodemon server",
     "hack": "concurrently \"yarn hack:server\" \"yarn hack:client\"",
-    "start": "node server.js"
+    "start": "npm run setdb && node server"
   },
   "dependencies": {
     "axios": "^0.21.0",
     "concurrently": "^5.3.0",
     "core-js": "^3.6.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "fs": "^0.0.1-security",
     "knex": "^0.21.12",

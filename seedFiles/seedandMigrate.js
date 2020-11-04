@@ -3,8 +3,8 @@ const config = require("../knexfile");
 const db = knex(config);
 
 
-const seedAsteroids = require("./importAsteroids");
-const seedItems = require("./importItems");
+// const seedAsteroids = require("./importAsteroids");
+// const seedItems = require("./importItems");
 
 (async () => {
   try {
@@ -12,13 +12,18 @@ const seedItems = require("./importItems");
 
      //then migrate 
     console.log("Running migrations");
-    await db.migrate.latest();
+    await db.migrate.latest()
+      .then(function () {
+        return knex.seed.run()
+    }).then(function(){
+      console.log("seeds were successful")
+    });
      // then seed
-    await seedAsteroids();
-    console.log("asteroids table populated");
+    // await seedAsteroids();
+    // console.log("asteroids table populated");
 
-    await seedItems();
-    console.log("items table populated");
+    // await seedItems();
+    // console.log("items table populated");
 
   } catch (err) {
     console.error("Error migrateing and seeding!", err);
