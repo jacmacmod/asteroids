@@ -3,16 +3,20 @@ const app = express();
 const knex = require("knex");
 const config = require("./knexfile");
 const db = knex(config);
+const path =require("path");
 require("dotenv").config();
 
 
-const PORT = process.env.PORT || 9000;
+//
+
+//const PORT = process.env.PORT || 9000;
 // Serve static assets
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    next();
-  });
-app.use(express.static(__dirname, + "/public"));
+// app.use((req, res, next) => {
+//     res.header('Access-Control-Allow-Origin', '*');
+//     next();
+//   });
+  app.use(express.static("dist"));
+//app.use(express.static(__dirname, + "/public"));
 
 app.get("/api/asteroids", async (req, res) => {
     try {
@@ -67,5 +71,7 @@ app.get("/api/closest/:name", async (req, res) => {
       res.sendStatus(500);
     }
   });
-  app.listen(PORT, () => console.log(`App listening on port ${PORT}!`));
+
+
   
+  module.exports = app;

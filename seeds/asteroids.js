@@ -1,4 +1,4 @@
-import {seedAsteroids} from "../seedFiles/importAsteroids";
+const seedAsteroids = require("../seedFunctions/importAsteroids");
 exports.seed = function(knex) {
   // Deletes ALL existing entries
   return knex('asteroids').del()

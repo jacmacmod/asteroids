@@ -1,4 +1,4 @@
-import {seedItems} from "../seedFiles/importItems"
+const seedItems =  require("../seedFunctions/importItems");
 exports.seed = function(knex) {
   // Deletes ALL existing entries
   return knex('items').del()
