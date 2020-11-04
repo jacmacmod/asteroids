@@ -141,7 +141,7 @@ export default {
 
 .asteroid {
   margin: 20px;
-  width: 140px;
+  width: 130px;
   height: auto;
   
  
