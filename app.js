@@ -14,7 +14,6 @@ const PORT = process.env.PORT || 9000;
     }).then(function() {
       console.log("seeds were successful")
     });
-
     console.log("----running express server-----")
     app.listen(PORT, ()  => console.log(`App listening on port ${PORT}!`));
   } catch (err) {

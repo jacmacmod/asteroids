@@ -26,8 +26,8 @@ const items = [
     },
     {
         id:5,
-        name: 'City Block',
-        diameter_in_meters: 50, 
+        name: 'Soccer Field',
+        diameter_in_meters: 100, 
     },
     {
         id:6,

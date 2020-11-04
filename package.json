@@ -3,12 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "setdb": "node seedandMigrate.js",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "hack:client": "vue-cli-service serve",
-    "hack:server": "nodemon server",
+    "hack:server": "nodemon app",
     "hack": "concurrently \"yarn hack:server\" \"yarn hack:client\"",
     "start": "node app"
   },

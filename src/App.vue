@@ -1,45 +1,59 @@
 <template>
   <div id="app">
-
-
-<div class="header">
-  <button v-on:click="compare">COMPARE</button>
-  <select v-model="selectedAsteroid" >
-  <option disabled value="">Please select Asteroid☄️</option>
-  <option v-for="asteroid of asteroids" :key="asteroid" >{{asteroid.name}}
-  </option>
-</select>
-
-<div> 
- selected Asteroid: {{selectedAsteroid}}
-</div>
-<div> 
-  Closest Object: {{EarthObject}}
-</div>
-
-
-</div>
-
-<div class="comparison-area">
-  <div class="asteroid" >{{selectedAsteroid}}</div>
-  <div class="asteroid scaledObject" :style="cssProps">{{EarthObject.name}} </div>
-</div>
-<h2>{{EarthObject.name}} is {{scale}} times the size of the Asteroid {{selectedAsteroid}}</h2>
+    <div class =wrapper>
+    <!-- selector area -->
+    <div class="header">
+      <button v-on:click="compare">COMPARE</button>
+      <select v-model="selectedAsteroid" >
+      <option disabled value="">Please select Asteroid☄️</option>
+      <option v-for="asteroid of asteroids" :key="asteroid" >{{asteroid.name}}
+      </option>
+      </select>
+    </div>
+       <!-- results -->
+       
+    <div class="sidebar" ><img class="asteroid" :src="photos[1].photo"/>{{selectedAsteroid}} </div>
+    <div class="sidebar2" :style="cssProps">  <img class="asteroid scaledObject" :src="EarthPhoto"/> {{EarthObject.name}} </div>
+    <div class="content">
+      <h2 >{{EarthObject.name}} is {{scale}} times the size of the Asteroid {{selectedAsteroid}}</h2>
+    </div>
+    <div class="footer">
+      👾 <a href="https://github.com/OnigiriJack/asteroids">GITHUB</a>
+        
+    </div>
+    </div>
   </div>
 </template>
 
 <script>
 import {asteroidNamesAndSize, closestObjectToAsteroid} from "../utils";
+let airplane = require("./assets/airplane.png");
+let asteroid = require("./assets/asteroid.png");
+let cactus = require("./assets/cactus.png");
+let fridge = require("./assets/fridge.png");
+let soccer = require("./assets/soccer.png");
+let truck = require("./assets/truck.png");
+let building = require("./assets/building.png");
+
 
 export default {
   name: 'App',
   data: () => ({
     asteroids: [1,2,3],
     scale: 1.1,
+    photos: [
+      {photo: airplane, name: "Cactus"}, 
+      {photo: asteroid, name: "Asteroid"}, 
+      {photo: building, name: "Mori Tower"}, 
+      {photo: cactus, name: "Cactus"}, 
+      {photo:fridge, name: "Fridge"}, 
+      {photo: soccer, name: "Soccer Field"}, 
+      {photo: truck, name: "Truck"},
+      ],
     selectedAsteroid: "",
     asteroid: "",
     EarthObject: "",
-    jack: "jack",
+    EarthPhoto: "",
   }),
   mounted() {
   asteroidNamesAndSize().then((data) => {
@@ -51,22 +65,24 @@ export default {
       closestObjectToAsteroid(this.selectedAsteroid)
       .then((data) => {
         this.EarthObject = data;
+        for (let photo of this.photos){
+          if(photo.name === this.EarthObject.name){
+            this.EarthPhoto = photo.photo;
+          }
+        }
         for (let asteroid of this.asteroids) {
           if(asteroid.name === this.selectedAsteroid){
-            this.scale = asteroid.diameter_in_meters_min / this.EarthObject.diameter_in_meters;
+            this.scale = (asteroid.diameter_in_meters_min / this.EarthObject.diameter_in_meters).toFixed(2);
           }
         }
       });
     },
-  
-
   },
   computed: {
     cssProps() {
       return {
         '--objectScale': this.scale,
         '--j': "red",
-    
       }
     }
     },
@@ -78,29 +94,54 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #3b404e;
-  color: white;
-  height: 100%;
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 10px;
-  grid-auto-rows: minmax(100px, auto);
 }
-.header {
-  grid-row: 1 / 2;
-  grid-column: 1 / 4;
-}
+.sidebar {
+        grid-area: sidebar;
+        text-align: center;
+    }
 
-.comparions-area {
-  grid-row: 1 / 2;
-  grid-column: 1 / 4;
-}
+    .sidebar2 {
+        grid-area: sidebar2;
+        text-align: center;
+    }
+
+    .content {
+        grid-area: content;
+    }
+
+    .header {
+        grid-area: header;
+    }
+
+    .footer {
+        grid-area: footer;
+        text-align: center;
+        background-color:cornsilk;
+    }
+
+    .wrapper {
+        background-color: #fff;
+        color: #444;
+    }
+
+  .wrapper {
+    background-color: #3b404e;
+  color: white;
+    display: grid;
+    grid-gap: 1em;
+    grid-template-areas:
+     "header"
+     "sidebar"
+     "content"
+     "sidebar2"
+     "footer"
+  }
+
 .asteroid {
-  margin: 100px;
+  margin: 20px;
   width: 80px;
-  height: 80px;
-  background-color: skyblue;
+  height: auto;
+ 
 }
 
 .scaledObject {
@@ -108,4 +149,25 @@ export default {
   background-color: var(--j);
 }
 
+ @media only screen and (min-width: 500px)  {
+    .wrapper {
+        grid-template-columns: 20% auto;
+        grid-template-areas:
+    "header   header"
+        "sidebar  content"
+        "sidebar2 sidebar2"
+        "footer   footer";
+    }
+    }
+  @media only screen and (min-width: 600px)   {
+        .wrapper {
+      grid-gap: 20px;
+            grid-template-columns: 120px auto 120px;
+            grid-template-areas:
+      "header  header  header"
+            "sidebar content sidebar2"
+            "footer  footer  footer";
+            max-width: 600px;
+        }
+    }
 </style>
