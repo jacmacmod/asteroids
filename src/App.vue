@@ -12,8 +12,8 @@
     </div>
        <!-- results -->
        
-    <div class="sidebar" ><img class="asteroid" :src="photos[1].photo"/>{{selectedAsteroid}} </div>
-    <div class="sidebar2" :style="cssProps">  <img class="asteroid scaledObject" :src="EarthPhoto"/> {{EarthObject.name}} </div>
+    <div class="sidebar" ><img class="asteroid" :src="photos[1].photo"/>{{selectedAsteroid}}  {{AsteroidDiameter}} meters </div>
+    <div class="sidebar2" :style="cssProps">  <img class="asteroid scaledObject" :src="EarthPhoto"/> {{EarthObject.name}} {{EarthObject.diameter_in_meters}} meters</div>
     <div class="content">
       <h2 >{{EarthObject.name}} is {{scale}} times the size of the Asteroid {{selectedAsteroid}}</h2>
     </div>
@@ -54,6 +54,7 @@ export default {
     asteroid: "",
     EarthObject: "",
     EarthPhoto: "",
+    AsteroidDiameter: ";"
   }),
   mounted() {
   asteroidNamesAndSize().then((data) => {
@@ -72,7 +73,8 @@ export default {
         }
         for (let asteroid of this.asteroids) {
           if(asteroid.name === this.selectedAsteroid){
-            this.scale = (asteroid.diameter_in_meters_min / this.EarthObject.diameter_in_meters).toFixed(2);
+            this.AsteroidDiameter = asteroid.diameter_in_meters_min ;
+            this.scale = ( this.EarthObject.diameter_in_meters/asteroid.diameter_in_meters_min ).toFixed(2);
           }
         }
       });
@@ -82,7 +84,6 @@ export default {
     cssProps() {
       return {
         '--objectScale': this.scale,
-        '--j': "red",
       }
     }
     },
@@ -107,6 +108,7 @@ export default {
 
     .content {
         grid-area: content;
+        margin: 5px;
     }
 
     .header {
@@ -139,14 +141,15 @@ export default {
 
 .asteroid {
   margin: 20px;
-  width: 80px;
+  width: 140px;
   height: auto;
+  
  
 }
 
 .scaledObject {
   transform: scale(var(--objectScale)); /* Equal to scaleX(0.7) scaleY(0.7) */
-  background-color: var(--j);
+  
 }
 
  @media only screen and (min-width: 500px)  {
