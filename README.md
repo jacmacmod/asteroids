@@ -6,7 +6,7 @@ This was created during my time as a student at Code Chrysalis
 
 ## About
 
-This app allows you to compare the size of asteroids detected today with from near Earth object web service. You can also learn more about the Asteroid you picked like its speed and orbiting body.
+[This app](https://asteroids-comparison.herokuapp.com/) allows you to compare the size of asteroids detected today with from near Earth object web service. You can also learn more about the Asteroid you picked like its speed and orbiting body.
 
 <img width="300" alt="スクリーンショット 2020-11-04 8 57 33" src="https://user-images.githubusercontent.com/35797565/98053417-de0aea00-1e7b-11eb-82bc-59e814046aff.png">
 
