@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- selector area -->
-
+    <!-- <asteroidSelector /> -->
     <div class="header-wrapper">
       <select v-model="selectedAsteroid">
         <option disabled value="">Choose an Asteroid☄️</option>
@@ -11,27 +11,15 @@
       </select>
       <button v-on:click="compare">COMPARE</button>
     </div>
-    <!-- results -->
-    <div v-if="start" class="compare-wrapper">
-      <div class="compare-item">
-        <img :src="photos[1].photo" />
-      </div>
-
-      <div class="compare-item">
-        <img class="scaledObject" :src="EarthPhoto" :style="cssProps" />
-      </div>
-      <!-- <div class="compare-object"> -->
-      <ul class="compare-item">
-        <li>{{ selectedAsteroid }}</li>
-        <li>{{ AsteroidDiameter }} m</li>
-      </ul>
-      <!-- </div> -->
-
-      <ul class="compare-item">
-        <li>{{ EarthObject.name }}</li>
-        <li>{{ EarthObject.diameter_in_meters }} m</li>
-      </ul>
-    </div>
+    <comparison
+      v-bind:Asteroid="selectedAsteroid"
+      v-bind:scale="scale"
+      v-bind:EarthObject="EarthObject"
+      v-bind:AsteroidDiameter="AsteroidDiameter"
+      v-bind:selectedAsteroid="selectedAsteroid"
+      v-if="start"
+      v-bind:EarthPhoto="EarthPhoto"
+    />
 
     <div v-if="start">
       <h2>
@@ -46,29 +34,17 @@
 </template>
 
 <script>
+import Comparison from './components/Comparison';
+//import AsteroidSelector from './components/AsteroidSelector';
 import { asteroidNamesAndSize, closestObjectToAsteroid } from '../utils';
-let airplane = require('./assets/airplane.png');
-let asteroid = require('./assets/asteroid.png');
-let cactus = require('./assets/cactus.png');
-let fridge = require('./assets/fridge.png');
-let soccer = require('./assets/soccer.png');
-let truck = require('./assets/truck.png');
-let building = require('./assets/building.png');
+import { getPhotos } from './assets/photos';
 
 export default {
   name: 'App',
   data: () => ({
-    asteroids: [1, 2, 3],
+    asteroids: [],
     scale: 1,
-    photos: [
-      { photo: airplane, name: 'Airplane' },
-      { photo: asteroid, name: 'Asteroid' },
-      { photo: building, name: 'Mori Tower' },
-      { photo: cactus, name: 'Cactus' },
-      { photo: fridge, name: 'Fridge' },
-      { photo: soccer, name: 'Soccer Field' },
-      { photo: truck, name: 'Truck' },
-    ],
+    photos: getPhotos(),
     selectedAsteroid: '',
     asteroid: '',
     EarthObject: '',
@@ -76,6 +52,10 @@ export default {
     AsteroidDiameter: ';',
     start: false,
   }),
+  components: {
+    comparison: Comparison,
+    //// asteroidSelector: AsteroidSelector,
+  },
   mounted() {
     asteroidNamesAndSize().then((data) => {
       this.asteroids = data;
@@ -103,14 +83,6 @@ export default {
       });
     },
   },
-
-  computed: {
-    cssProps() {
-      return {
-        '--objectScale': this.scale,
-      };
-    },
-  },
 };
 </script>
 
@@ -122,7 +94,14 @@ html {
   font-family: 'Turret Road', cursive;
   padding: 0;
   margin: 0;
-  background-color: chocolate;
+  color: white;
+  background: rgb(9, 13, 121);
+  background: linear-gradient(
+    90deg,
+    rgba(9, 13, 121, 1) 0%,
+    rgba(2, 0, 36, 1) 100%,
+    rgba(0, 212, 255, 1) 100%
+  );
 }
 
 .blank-on-start {
@@ -135,22 +114,6 @@ html {
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 18px;
   padding: 10px;
-}
-.compare-wrapper {
-  display: grid;
-  background-color: slateblue;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 5px;
-
-  justify-items: center;
-  align-items: stretch;
-}
-
-.compare-item {
-  display: flex;
-  justify-self: center;
-  justify-content: center;
-  flex-direction: column;
 }
 
 img {
@@ -168,8 +131,6 @@ button {
 ul {
   list-style: '🔸';
 }
-.scaledObject {
-  transform: scale(var(--objectScale)); /* Equal to scaleX(0.7) scaleY(0.7) */
-}
+
 /* TODO media query truck are really big on full screen */
 </style>
