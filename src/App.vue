@@ -115,8 +115,11 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Turret+Road:wght@500&display=swap');
+
 body,
 html {
+  font-family: 'Turret Road', cursive;
   padding: 0;
   margin: 0;
   background-color: chocolate;
@@ -146,20 +149,25 @@ html {
 .compare-item {
   display: flex;
   justify-self: center;
+  justify-content: center;
   flex-direction: column;
 }
 
 img {
   width: auto;
   margin-top: 23px;
-
   height: 50px;
 }
 h3 {
   font-size: 12px;
   padding-left: 5px;
 }
-
+button {
+  border: 0.1em solid #ffffff;
+}
+ul {
+  list-style: '🔸';
+}
 .scaledObject {
   transform: scale(var(--objectScale)); /* Equal to scaleX(0.7) scaleY(0.7) */
 }
