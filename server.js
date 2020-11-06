@@ -30,14 +30,13 @@ app.get('/api/asteroids/namesAndSize', async (req, res) => {
   }
 });
 
-app.get('/api/asteroids/:id', async (req, res) => {
-  const id = req.params.id;
-
+app.get('/api/asteroids/:name', async (req, res) => {
+  const name = req.params.name;
   try {
-    const asteroidNames = await db.select().table('asteroids').where({
-      id: id,
+    const asteroidInfo = await db.select().table('asteroids').where({
+      name: name,
     });
-    res.json(asteroidNames);
+    res.json(asteroidInfo);
   } catch (err) {
     console.error('Error finding names!', err);
     res.sendStatus(500);

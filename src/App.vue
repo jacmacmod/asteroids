@@ -1,7 +1,12 @@
 <template>
   <div id="app">
-    <!-- selector area -->
-    <!-- <asteroidSelector /> -->
+    <div class="title">
+      <h1 class="title-child">Asteroid Comparison App</h1>
+
+      <p>built with</p>
+      <img class="logo" :src="nasaAPIphoto" />
+      <p>{ APIs }</p>
+    </div>
     <div class="header-wrapper">
       <select v-model="selectedAsteroid">
         <option disabled value="">Choose an Asteroid☄️</option>
@@ -20,13 +25,13 @@
       v-if="start"
       v-bind:EarthPhoto="EarthPhoto"
     />
+    <asteroidInfo
+      v-if="start"
+      v-bind:selectedAsteroid="selectedAsteroid"
+      v-bind:EarthObject="EarthObject"
+      v-bind:scale="scale"
+    />
 
-    <div v-if="start">
-      <h2>
-        {{ EarthObject.name }} is {{ scale }} times the size of the Asteroid
-        {{ selectedAsteroid }}
-      </h2>
-    </div>
     <div class="">
       👾 <a href="https://github.com/OnigiriJack/asteroids">GITHUB</a>
     </div>
@@ -35,15 +40,18 @@
 
 <script>
 import Comparison from './components/Comparison';
+import AsteroidInfo from './components/Asteroidnfo';
 //import AsteroidSelector from './components/AsteroidSelector';
 import { asteroidNamesAndSize, closestObjectToAsteroid } from '../utils';
 import { getPhotos } from './assets/photos';
+import nasaAPIphoto from './assets/nasa-logo.png';
 
 export default {
   name: 'App',
   data: () => ({
     asteroids: [],
     scale: 1,
+    nasaAPIphoto: nasaAPIphoto,
     photos: getPhotos(),
     selectedAsteroid: '',
     asteroid: '',
@@ -54,6 +62,7 @@ export default {
   }),
   components: {
     comparison: Comparison,
+    asteroidInfo: AsteroidInfo,
     //// asteroidSelector: AsteroidSelector,
   },
   mounted() {
@@ -103,19 +112,85 @@ html {
     rgba(0, 212, 255, 1) 100%
   );
 }
-
+/* Reset Select */
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  background: rgb(9, 13, 121);
+  background-image: none;
+}
+/* Remove IE arrow */
+select::-ms-expand {
+  display: none;
+}
+/* Custom Select */
+.select {
+  position: relative;
+  display: flex;
+  width: 20em;
+  height: 3em;
+  line-height: 3;
+  background: #2c3e50;
+  overflow: hidden;
+  border-radius: 0.25em;
+}
+select {
+  border: 0.1em solid #ffffff;
+  flex: 1;
+  padding: 0 0.5em;
+  color: #fff;
+  cursor: pointer;
+}
+/* Arrow */
+.select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 1em;
+  background: rgb(9, 13, 121);
+  cursor: pointer;
+  pointer-events: none;
+  -webkit-transition: 0.25s all ease;
+  -o-transition: 0.25s all ease;
+  transition: 0.25s all ease;
+}
+/* Transition */
+.select:hover::after {
+  color: #f39c12;
+}
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+.title-child {
+  margin-left: 10px;
+  margin-bottom: 0px;
+}
 .blank-on-start {
   display: none;
 }
 
 .header-wrapper {
   display: grid;
-  background-color: thistle;
+  background-color: rgb(177, 2, 2);
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 18px;
   padding: 10px;
 }
-
+.logo {
+  width: auto;
+  margin-top: 23px;
+  height: 34px;
+  margin-bottom: 10px;
+}
 img {
   width: auto;
   margin-top: 23px;
@@ -127,9 +202,11 @@ h3 {
 }
 button {
   border: 0.1em solid #ffffff;
+  background: rgb(9, 13, 121);
+  color: aliceblue;
 }
 ul {
-  list-style: '🔸';
+  list-style: '🔺';
 }
 
 /* TODO media query truck are really big on full screen */

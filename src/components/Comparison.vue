@@ -9,12 +9,11 @@
     <div class="compare-item">
       <img class="scaledObject" :src="EarthPhoto" :style="cssProps" />
     </div>
-    <!-- <div class="compare-object"> -->
+
     <ul class="compare-item">
       <li>{{ selectedAsteroid }}</li>
       <li>{{ AsteroidDiameter }} m</li>
     </ul>
-    <!-- </div> -->
 
     <ul class="compare-item">
       <li>{{ EarthObject.name }}</li>
