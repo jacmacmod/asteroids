@@ -25,6 +25,7 @@
       v-if="start"
       v-bind:EarthPhoto="EarthPhoto"
     />
+    <h4 v-else>Choose an asteroid from the menu above</h4>
     <asteroidInfo
       v-if="start"
       v-bind:selectedAsteroid="selectedAsteroid"
@@ -32,16 +33,16 @@
       v-bind:scale="scale"
     />
 
-    <div class="">
-      👾 <a href="https://github.com/OnigiriJack/asteroids">GITHUB</a>
-    </div>
+    <bottominfo />
   </div>
 </template>
 
 <script>
 import Comparison from './components/Comparison';
 import AsteroidInfo from './components/Asteroidnfo';
+let asteroidPic = require('./assets/asteroid.png');
 //import AsteroidSelector from './components/AsteroidSelector';
+import Footer from './components/Footer';
 import { asteroidNamesAndSize, closestObjectToAsteroid } from '../utils';
 import { getPhotos } from './assets/photos';
 import nasaAPIphoto from './assets/nasa-logo.png';
@@ -51,6 +52,7 @@ export default {
   data: () => ({
     asteroids: [],
     scale: 1,
+    asteroidPic: asteroidPic,
     nasaAPIphoto: nasaAPIphoto,
     photos: getPhotos(),
     selectedAsteroid: '',
@@ -63,6 +65,7 @@ export default {
   components: {
     comparison: Comparison,
     asteroidInfo: AsteroidInfo,
+    bottominfo: Footer,
     //// asteroidSelector: AsteroidSelector,
   },
   mounted() {
@@ -128,42 +131,17 @@ select {
 select::-ms-expand {
   display: none;
 }
-/* Custom Select */
-.select {
-  position: relative;
-  display: flex;
-  width: 20em;
-  height: 3em;
-  line-height: 3;
-  background: #2c3e50;
-  overflow: hidden;
-  border-radius: 0.25em;
-}
 select {
   border: 0.1em solid #ffffff;
   flex: 1;
   padding: 0 0.5em;
   color: #fff;
   cursor: pointer;
+  text-align: center;
+  border: 0.3em solid #ffffff;
+  border-radius: 0.12em;
 }
-/* Arrow */
-.select::after {
-  content: '\25BC';
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 0 1em;
-  background: rgb(9, 13, 121);
-  cursor: pointer;
-  pointer-events: none;
-  -webkit-transition: 0.25s all ease;
-  -o-transition: 0.25s all ease;
-  transition: 0.25s all ease;
-}
-/* Transition */
-.select:hover::after {
-  color: #f39c12;
-}
+
 .title {
   display: flex;
   justify-content: center;
@@ -202,8 +180,20 @@ h3 {
 }
 button {
   border: 0.1em solid #ffffff;
+  padding: 0.6em 1.5em;
+  border-radius: 0.12em;
   background: rgb(9, 13, 121);
+  text-decoration: none;
+  font-weight: 200;
   color: aliceblue;
+  text-align: center;
+  font-size: 15px;
+}
+.astro-pic {
+  text-align: center;
+  width: auto;
+  margin-top: 23px;
+  height: 150px;
 }
 ul {
   list-style: '🔺';

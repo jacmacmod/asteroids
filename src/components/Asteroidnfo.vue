@@ -61,4 +61,7 @@ a:link {
 ul {
   list-style: '☄️';
 }
+h2 {
+  padding-left: 10px;
+}
 </style>
