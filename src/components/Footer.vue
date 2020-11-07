@@ -27,7 +27,7 @@ export default {
 .container {
   display: grid;
   justify-items: center;
-  position: absolute;
+
   bottom: 0;
   width: 100%;
   background-color: white;

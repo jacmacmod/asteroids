@@ -33,10 +33,8 @@ export default {
   }),
   methods: {
     displayAsteroidInfo() {
-      console.log(this.selectedAsteroid);
       getAsteroidInformation(this.selectedAsteroid).then((data) => {
         this.AsteroidData = data[0];
-        console.log(data);
       });
     },
   },

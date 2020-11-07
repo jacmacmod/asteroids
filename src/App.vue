@@ -100,6 +100,7 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Turret+Road:wght@500&display=swap');
+/* At the top level of your code */
 
 body,
 html {
@@ -114,6 +115,12 @@ html {
     rgba(2, 0, 36, 1) 100%,
     rgba(0, 212, 255, 1) 100%
   );
+}
+
+#app {
+  display: grid;
+  grid-template-rows: auto;
+  grid-gap: 20px;
 }
 /* Reset Select */
 select {
@@ -197,6 +204,14 @@ button {
 }
 ul {
   list-style: '🔺';
+}
+
+@media (min-width: 760px) and (max-width: 20000px) {
+  img {
+    width: auto;
+    margin-top: 23px;
+    height: 200px;
+  }
 }
 
 /* TODO media query truck are really big on full screen */
