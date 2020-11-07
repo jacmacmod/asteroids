@@ -1,4 +1,4 @@
-This was created during my time as a student at Code Chrysalis
+This was created during my time as a student at [Code Chrysalis](https://www.codechrysalis.io/)
 
 # Asteroid Comparison App
 <img width="769" alt="スクリーンショット 2020-11-04 14 03 11" src="https://user-images.githubusercontent.com/35797565/98071307-833ab800-1ea6-11eb-8797-585bc03bb467.png">
