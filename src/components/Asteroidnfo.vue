@@ -6,10 +6,9 @@
         {{ selectedAsteroid }}
       </h2>
       <button v-on:click="displayAsteroidInfo">
-        learn more about {{ selectedAsteroid }}
+        Learn more about {{ selectedAsteroid }}
       </button>
     </div>
-
     <div class="results-item">
       <ul v-for="(value, propertyName, index) in AsteroidData" :key="index">
         <li v-if="index === 2">
@@ -24,10 +23,10 @@
 </template>
 
 <script>
-import { getAsteroidInformation } from '../../utils';
+import { getAsteroidInformation } from "../../utils";
 export default {
-  name: 'AsteroidInfo',
-  props: ['EarthObject', 'selectedAsteroid', 'scale'],
+  name: "AsteroidInfo",
+  props: ["EarthObject", "selectedAsteroid", "scale"],
   data: () => ({
     AsteroidData: [],
   }),
@@ -40,7 +39,6 @@ export default {
   },
 };
 </script>
-
 <style scoped>
 .results-wrapper {
   display: grid;
@@ -57,7 +55,7 @@ a:link {
   color: gainsboro;
 }
 ul {
-  list-style: '☄️';
+  list-style: "☄️";
 }
 h2 {
   padding-left: 10px;

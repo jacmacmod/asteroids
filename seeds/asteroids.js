@@ -1,11 +1,11 @@
 const seedAsteroids = require("../seedFunctions/importAsteroids");
-exports.seed = function(knex) {
-  // Deletes ALL existing entries
-  return knex('asteroids').del()
+exports.seed = function (knex) {
+  return knex("asteroids")
+    .del()
     .then(function () {
-      // Inserts seed entries
-      return seedAsteroids() 
-    }).then(function(){
-      console.log("asteroids were seeds successfully")
+      return seedAsteroids();
+    })
+    .then(function () {
+      console.log("Asteroids were seeded successfully.");
     });
 };

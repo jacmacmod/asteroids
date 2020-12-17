@@ -9,20 +9,18 @@
     <button v-on:click="compare">COMPARE</button>
   </div>
 </template>
-
 <script>
-import { asteroidNamesAndSize, closestObjectToAsteroid } from '../../utils';
+import { asteroidNamesAndSize, closestObjectToAsteroid } from "../../utils";
 export default {
-  name: 'AsteroidSelector',
-  //props: [],
+  name: "AsteroidSelector",
   data: () => ({
     asteroids: [],
     scale: 1,
-    selectedAsteroid: '',
-    asteroid: '',
-    EarthObject: '',
-    EarthPhoto: '',
-    AsteroidDiameter: ';',
+    selectedAsteroid: "",
+    asteroid: "",
+    EarthObject: "",
+    EarthPhoto: "",
+    AsteroidDiameter: ";",
     start: false,
   }),
   methods: {

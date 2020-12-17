@@ -1,20 +1,15 @@
 <template>
-  <!-- results -->
-
   <div class="compare-wrapper">
     <div class="compare-item">
       <img :src="asteroidPic" />
     </div>
-
     <div class="compare-item">
       <img class="scaledObject" :src="EarthPhoto" :style="cssProps" />
     </div>
-
     <ul class="compare-item">
       <li>{{ selectedAsteroid }}</li>
       <li>{{ AsteroidDiameter }} m</li>
     </ul>
-
     <ul class="compare-item">
       <li>{{ EarthObject.name }}</li>
       <li>{{ EarthObject.diameter_in_meters }} m</li>
@@ -23,17 +18,17 @@
 </template>
 
 <script>
-let asteroidPic = require('../assets/asteroid.png');
+let asteroidPic = require("../assets/asteroid.png");
 
 export default {
-  name: 'Comparison',
+  name: "Comparison",
   props: [
-    'scale',
-    'EarthObject',
-    'scaledAsteroid',
-    'AsteroidDiameter',
-    'selectedAsteroid',
-    'EarthPhoto',
+    "scale",
+    "EarthObject",
+    "scaledAsteroid",
+    "AsteroidDiameter",
+    "selectedAsteroid",
+    "EarthPhoto",
   ],
   data: () => ({
     asteroidPic: asteroidPic,
@@ -41,13 +36,12 @@ export default {
   computed: {
     cssProps() {
       return {
-        '--objectScale': this.scale,
+        "--objectScale": this.scale,
       };
     },
   },
 };
 </script>
-
 <style>
 .compare-wrapper {
   display: grid;
@@ -57,14 +51,12 @@ export default {
   justify-items: center;
   align-items: stretch;
 }
-
 .compare-item {
   display: flex;
   justify-self: center;
   justify-content: center;
   flex-direction: column;
 }
-
 .scaledObject {
   transform: scale(var(--objectScale)); /* Equal to scaleX(0.7) scaleY(0.7) */
 }

@@ -1,11 +1,10 @@
-const seedItems =  require("../seedFunctions/importItems");
-exports.seed = function(knex) {
-  // Deletes ALL existing entries
-  return knex('items').del()
+const seedItems = require("../seedFunctions/importItems");
+exports.seed = function (knex) {
+  return knex("items")
+    .del()
     .then(function () {
-      // Inserts seed entries
-      return seedItems().then(function(){
-        console.log("items were seeds successfully")
+      return seedItems().then(function () {
+        console.log("Items were seeds successfully.");
       });
     });
 };

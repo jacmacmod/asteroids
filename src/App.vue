@@ -2,7 +2,6 @@
   <div id="app">
     <div class="title">
       <h1 class="title-child">Asteroid Comparison App</h1>
-
       <p>built with</p>
       <img class="logo" :src="nasaAPIphoto" />
       <p>{ APIs }</p>
@@ -32,41 +31,38 @@
       v-bind:EarthObject="EarthObject"
       v-bind:scale="scale"
     />
-
     <bottominfo />
   </div>
 </template>
 
 <script>
-import Comparison from './components/Comparison';
-import AsteroidInfo from './components/Asteroidnfo';
-let asteroidPic = require('./assets/asteroid.png');
-//import AsteroidSelector from './components/AsteroidSelector';
-import Footer from './components/Footer';
-import { asteroidNamesAndSize, closestObjectToAsteroid } from '../utils';
-import { getPhotos } from './assets/photos';
-import nasaAPIphoto from './assets/nasa-logo.png';
+import Comparison from "./components/Comparison";
+import AsteroidInfo from "./components/Asteroidnfo";
+let asteroidPic = require("./assets/asteroid.png");
+import Footer from "./components/Footer";
+import { asteroidNamesAndSize, closestObjectToAsteroid } from "../utils";
+import { getPhotos } from "./assets/photos";
+import nasaAPIphoto from "./assets/nasa-logo.png";
 
 export default {
-  name: 'App',
+  name: "App",
   data: () => ({
     asteroids: [],
     scale: 1,
     asteroidPic: asteroidPic,
     nasaAPIphoto: nasaAPIphoto,
     photos: getPhotos(),
-    selectedAsteroid: '',
-    asteroid: '',
-    EarthObject: '',
-    EarthPhoto: '',
-    AsteroidDiameter: ';',
+    selectedAsteroid: "",
+    asteroid: "",
+    EarthObject: "",
+    EarthPhoto: "",
+    AsteroidDiameter: ";",
     start: false,
   }),
   components: {
     comparison: Comparison,
     asteroidInfo: AsteroidInfo,
     bottominfo: Footer,
-    //// asteroidSelector: AsteroidSelector,
   },
   mounted() {
     asteroidNamesAndSize().then((data) => {
@@ -99,12 +95,10 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Turret+Road:wght@500&display=swap');
-/* At the top level of your code */
-
+@import url("https://fonts.googleapis.com/css2?family=Turret+Road:wght@500&display=swap");
 body,
 html {
-  font-family: 'Turret Road', cursive;
+  font-family: "Turret Road", cursive;
   padding: 0;
   margin: 0;
   color: white;
@@ -116,7 +110,6 @@ html {
     rgba(0, 212, 255, 1) 100%
   );
 }
-
 #app {
   display: grid;
   grid-template-rows: auto;
@@ -148,7 +141,6 @@ select {
   border: 0.3em solid #ffffff;
   border-radius: 0.12em;
 }
-
 .title {
   display: flex;
   justify-content: center;
@@ -162,7 +154,6 @@ select {
 .blank-on-start {
   display: none;
 }
-
 .header-wrapper {
   display: grid;
   background-color: rgb(177, 2, 2);
@@ -203,9 +194,8 @@ button {
   height: 150px;
 }
 ul {
-  list-style: '🔺';
+  list-style: "🔺";
 }
-
 @media (min-width: 760px) and (max-width: 20000px) {
   img {
     width: auto;
@@ -213,6 +203,4 @@ ul {
     height: 200px;
   }
 }
-
-/* TODO media query truck are really big on full screen */
 </style>
