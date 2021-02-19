@@ -15,9 +15,9 @@
 </template>
 
 <script>
-import nasapi from '../assets/nasapi.png';
+import nasapi from "../assets/nasapi-min.png";
 export default {
-  name: 'Footer',
+  name: "Footer",
   data: () => ({
     apiphoto: nasapi,
   }),

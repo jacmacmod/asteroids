@@ -38,11 +38,11 @@
 <script>
 import Comparison from "./components/Comparison";
 import AsteroidInfo from "./components/Asteroidnfo";
-let asteroidPic = require("./assets/asteroid.png");
+let asteroidPic = require("./assets/asteroid-min.png");
 import Footer from "./components/Footer";
 import { asteroidNamesAndSize, closestObjectToAsteroid } from "../utils";
 import { getPhotos } from "./assets/photos";
-import nasaAPIphoto from "./assets/nasa-logo.png";
+import nasaAPIphoto from "./assets/nasa-logo-min.png";
 
 export default {
   name: "App",

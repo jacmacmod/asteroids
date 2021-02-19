@@ -18,7 +18,7 @@
 </template>
 
 <script>
-let asteroidPic = require("../assets/asteroid.png");
+let asteroidPic = require("../assets/asteroid-min.png");
 
 export default {
   name: "Comparison",
